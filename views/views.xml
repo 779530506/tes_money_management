@@ -1,0 +1,898 @@
+<odoo>
+  <data>
+    <!-- Start Boutiques Views -->
+    
+    <record model="ir.ui.view" id="money_management.boutique_list">
+      <field name="name">Boutiques</field>
+      <field name="model">money_management.boutique</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="logo" widget="image" string="Logo" class="boutique_logo"/>
+          <field name="designation"/>
+          <field name="adresse"/>
+          <field name="telephone"/>
+          <field name="description"/>
+          <field name="date_creation"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="money_management.boutique_search" model="ir.ui.view">
+            <field name="name">money_management.boutique.search</field>
+            <field name="model">money_management.boutique</field>
+            <field name="arch" type="xml">
+                <search string="Search Boutique Order">
+                    <field name="designation"  filter_domain="['|','|',('designation','ilike',self),('adresse','ilike',self),('telephone','ilike',self),('description','ilike',self),('state','ilike',self)]"/>
+                    <field name="adresse"/>
+                    <field name="telephone" />
+                    <field name="description"/>
+                    <field name="state"/>
+                    <!--<filter string="My Orders" domain="[('user_id','=',uid)]" name="my_sale_orders_filter"/>
+                    <separator/>
+                    <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/>
+                    <separator/>-->
+               </search>
+            </field>
+        </record>
+   
+    <record model="ir.actions.act_window" id="money_management.boutique_action_window">
+      <field name="name">Boutiques</field>
+      <field name="res_model">money_management.boutique</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+  
+    <record model="ir.actions.server" id="money_management.boutique_action_server">
+      <field name="name">Boutiques</field>
+      <field name="model_id" ref="model_money_management_boutique"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form,graph,pivot",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+   <!-- End Boutique -->
+   
+   
+   <!-- Start Caisse View -->
+   <record model="ir.ui.view" id="money_management.caisse_list">
+     <field name="name">Caisses</field>
+     <field name="model">money_management.caisse</field>
+     <field name="arch" type="xml">
+       <tree>
+         <field name="numero"/>
+         <field name="designation"/>
+         <field name="telephone"/>
+         <field name="description"/>
+         <field name="date_creation"/>
+         <field name="state"/>
+       </tree>
+     </field>
+   </record>
+
+   <record id="money_management.caisse_search" model="ir.ui.view">
+        <field name="name">money_management.caisse.search</field>
+        <field name="model">money_management.caisse</field>
+        <field name="arch" type="xml">
+            <search string="Search Caisse ">
+                <field name="numero"  filter_domain="['|','|',('numero','ilike',self),('designation','ilike',self),('telephone','ilike',self),('description','ilike',self),('state','ilike',self)]"/>
+                <field name="designation"/>
+                <field name="telephone" />
+                <field name="description"/>
+                <field name="state"/>
+                
+            </search>
+        </field>
+    </record>
+  
+   <record model="ir.actions.act_window" id="money_management.caisse_action_window">
+     <field name="name">Caisses</field>
+     <field name="res_model">money_management.caisse</field>
+     <field name="view_mode">tree,form,graph,pivot</field>
+   </record>
+ 
+   <record model="ir.actions.server" id="money_management.caisse_action_server">
+     <field name="name">Caisses</field>
+     <field name="model_id" ref="model_money_management_caisse"/>
+     <field name="state">code</field>
+     <field name="code">
+       action = {
+         "type": "ir.actions.act_window",
+         "view_mode": "tree,form,graph,pivot",
+         "res_model": self._name,
+       }
+     </field>
+   </record>
+   
+   <!-- End Caisse -->
+
+   <!-- Start wallet View -->
+   <record model="ir.ui.view" id="money_management.wallet_list">
+     <field name="name">Wallet</field>
+     <field name="model">money_management.cronewallet</field>
+     <field name="arch" type="xml">
+       <tree>
+         <field name="nom"/>
+         <field name="image"/>
+         <field name="soldewallet"/>
+         <field name="date"/>
+       </tree>
+     </field>
+   </record>
+  
+   <record model="ir.actions.act_window" id="money_management.wallet_action_window">
+     <field name="name">Wallet</field>
+     <field name="res_model">money_management.cronewallet</field>
+     <field name="view_mode">tree,form,graph,pivot</field>
+   </record>
+ 
+   <record model="ir.actions.server" id="money_management.wallet_action_server">
+     <field name="name">Wallet</field>
+     <field name="model_id" ref="model_money_management_cronewallet"/>
+     <field name="state">code</field>
+     <field name="code">
+       action = {
+         "type": "ir.actions.act_window",
+         "view_mode": "tree,form,graph,pivot",
+         "res_model": self._name,
+       }
+     </field>
+   </record>
+   
+   <!-- End Wallet -->Ò
+   
+   <!-- Start Client View -->
+   <record model="ir.ui.view" id="money_management.client_list">
+      <field name="name">clients</field>
+      <field name="model">money_management.client</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="telephone"/>
+          <field name="adresse"/>
+          <field name="date_creation"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="money_management.client_search" model="ir.ui.view">
+        <field name="name">money_management.client.search</field>
+        <field name="model">money_management.client</field>
+        <field name="arch" type="xml">
+            <search string="Search Caisse ">
+                <!--<field name="name"  filter_domain="['|','|',('name','ilike',self),('telephone','ilike',self),('adresse','ilike',self),('state','ilike',self)]"/>-->
+                <field name="name"/>
+                <field name="telephone" />
+                <field name="adresse"/>
+                <field name="state"/>
+                
+            </search>
+        </field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="money_management.client_action_window">
+      <field name="name">Clients</field>
+      <field name="res_model">money_management.client</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+  
+    <record model="ir.actions.server" id="money_management.client_action_server">
+      <field name="name">money_management client server</field>
+      <field name="model_id" ref="model_money_management_client"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form,graph,pivot",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+   <!-- End client view -->
+
+   <!-- Start Distributeur View -->
+   <record model="ir.ui.view" id="money_management.distributeur_list">
+      <field name="name">Distributeurs</field>
+      <field name="model">money_management.distributeur</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="telephone"/>
+          <field name="adresse"/>
+          <field name="date_enregistrement"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="money_management.distributeur_action_window">
+      <field name="name">Distributeur</field>
+      <field name="res_model">money_management.distributeur</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+  
+    <record model="ir.actions.server" id="money_management.distributeur_action_server">
+      <field name="name">money_management distributeur server</field>
+      <field name="model_id" ref="model_money_management_distributeur"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form,graph,pivot",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+   <!-- End client view -->
+
+   
+
+   <!-- Start Avoir View -->
+
+   <record model="ir.ui.view" id="money_management.avoir_list">
+      <field name="name">Avoirs list</field>
+      <field name="model">money_management.avoir</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="boutique_id" string="Boutique"/>
+          <field name="client_id" string="Client"/>
+          <field name="montant"/>
+          <field name="date_avoir"/>
+        </tree>
+      </field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="money_management.avoir_action_window">
+      <field name="name">Avoirs</field>
+      <field name="res_model">money_management.avoir</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+  
+    <record model="ir.actions.server" id="money_management.avoir_action_server">
+      <field name="name">avoir server</field>
+      <field name="model_id" ref="model_money_management_avoir"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form,graph,pivot",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+   <!-- End avoir view -->
+
+   <!--Agent record-->
+   <record model="ir.ui.view" id="money_management.agents_list">
+      <field name="name">Agent</field>
+      <field name="model">money_management.agent</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="login"/> 
+          <field name="password" password="True" attrs="{'invisible': True}"/>
+          <field name="adresse"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.agent_action_window">
+      <field name="name">Agents</field>
+      <field name="res_model">money_management.agent</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End Agent record-->
+
+   <!--QR_code record-->
+      <record model="ir.ui.view" id="money_management.qrcode_list">
+      <field name="name">Qr Code list</field>
+      <field name="model">money_management.qrcode</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="amount" string="Montant"/>
+          <field name="agent_id" string="Agent"/>
+          <field name="qr_boutique_id"/>
+          <field name="qr_caisse_id"/>
+          <field name="date_generation"/>
+          <field name="date_scann"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+   <!--End QR_code record-->
+
+  <!--Payments record-->
+    <record model="ir.ui.view" id="money_management.payment_list">
+      <field name="name">Paiements</field>
+      <field name="model">money_management.paiement</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="pm_client_id"/>
+          <field name="pm_boutique_id"/>
+          <field name="pm_agent_id"/>
+          <field name="montant"/>
+          <field name="sole_client_befor"/>
+          <field name="sole_client_after"/>
+          <field name="sole_boutique_befor"/>
+          <field name="sole_boutique_befor"/>
+          <field name="date_paiement"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+   
+    <record model="ir.actions.act_window" id="money_management.payment_action_window">
+      <field name="name">Paiements</field>
+      <field name="res_model">money_management.paiement</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+  
+    <record model="ir.actions.server" id="money_management.payment_action_server">
+      <field name="name">money_management paiement server</field>
+      <field name="model_id" ref="model_money_management_client"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form,graph,pivot",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+  <!--End Payments record-->
+
+   <!--Tranasctions record-->
+      <record model="ir.ui.view" id="money_management.transactions_list">
+      <field name="name">Transactions</field>
+      <field name="model">money_management.transaction</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="transaction_reff" string="ID Transaction"/>
+          <field name="transac_amount" string="Montant"/>
+          <field name="trasac_account_source"/>
+          <field name="telephone_source"/>
+          <field name="trasac_account_destination"/>
+          <field name="telephone_destination"/>
+          <field name="trasac_crone_commission"/>
+          <field name="trasac_partenaire_commission"/>
+          <field name="transaction_type_id"/>
+          <field name="transac_date"/>
+          <field name="status"/>
+          <field name="tag"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="money_management.transaction_search" model="ir.ui.view">
+        <field name="name">money_management.transaction.search</field>
+        <field name="model">money_management.transaction</field>
+        <field name="arch" type="xml">
+            <search string="Search Caisse ">
+           <!-- <field name="transaction_reff"  filter_domain="['|','|',('transaction_reff','ilike',self),('transac_amount','ilike',self),
+                ('trasac_account_source','ilike',self),('telephone_source','ilike',self),('trasac_account_destination','ilike',self),('transac_date','ilike',self)
+                ,('transaction_type_id','ilike',self),('status','ilike',self)]"/>
+          <field name="transac_amount" string="Montant"/>-->
+          <field name="transaction_reff"/>
+          <field name="trasac_account_source"/>
+          <field name="telephone_source"/>
+          <field name="trasac_account_destination"/>
+          <field name="telephone_destination"/>
+          <field name="transaction_type_id"/>
+          <field name="transac_date"/>
+          <field name="status"/>      
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="money_management.transactions_action_window">
+      <field name="name">Transactions</field>
+      <field name="res_model">money_management.transaction</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+
+   <!--End Tranasctions record-->
+   
+   <!--Tranasctions Wallet record-->
+    <record model="ir.ui.view" id="money_management.transaction_wallet_list">
+      <field name="name">Transactionwallet</field>
+      <field name="model">money_management.transactionwallet</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="refference" string="ID Transaction"/>
+          <field name="montant" string="Montant"/>
+          <field name="numero"/>
+          <field name="message"/>
+          <field name="date"/>
+          <field name="etat"/>
+          <field name="type"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.transaction_wallet_action_window">
+      <field name="name">Transactionwallet</field>
+      <field name="res_model">money_management.transactionwallet</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+
+   <!--End Tranasctions Wallet record-->
+
+
+    <!--TranasctionsTypes record-->
+      <record model="ir.ui.view" id="money_management.transactions_types_list">
+      <field name="name">Types de transactions</field>
+      <field name="model">money_management.transactiontype</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="type_value"/>
+          <field name="crone_commission"/>
+          <field name="partenaire_commission"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.transactions_types_action_window">
+      <field name="name">Types Transactions</field>
+      <field name="res_model">money_management.transactiontype</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End TranasctionsTypes record-->
+
+   <!--Account record-->
+      <record model="ir.ui.view" id="money_management.accounts_list">
+      <field name="name">Accounts</field>
+      <field name="model">money_management.account</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="account_number"/>
+          <field name="telephone"/>
+          <field name="solde"/>
+          <field name="account_type"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="money_management.accounts_search" model="ir.ui.view">
+        <field name="name">money_management.account.search</field>
+        <field name="model">money_management.account</field>
+        <field name="arch" type="xml">
+            <search string="Search Compte ">
+                <field name="id" />
+                <field name="account_number" />
+                <field name="telephone"/>
+                <field name="solde" />
+                <field name="account_type"/>
+                <field name="date_creation"/>    
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="money_management.accounts_action_window">
+      <field name="name">Accounts</field>
+      <field name="res_model">money_management.account</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End Account record-->
+
+   <!--Commission record-->
+      <record model="ir.ui.view" id="money_management.commissions_list">
+      <field name="name">Commissions</field>
+      <field name="model">money_management.commission</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="commission_reff"/>
+          <field name="min_amount"/>
+          <field name="max_amount"/>
+          <field name="commission_type"/>
+          <field name="commission_value"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.commissions_action_window">
+      <field name="name">Commissions</field>
+      <field name="res_model">money_management.commission</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End Commission record-->
+
+   <!--Marchand record-->
+    <!--record model="ir.ui.view" id="money_management.marchand_list">
+      <field name="name">Marchands</field>
+      <field name="model">money_management.marchand</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name="nom_marchand"/>
+              <field name="telephone"/>
+              <field name="description"/>
+              <field name="date_creation"/>
+              <field name="state"/>
+          </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="money_management.marchand_action_window">
+      <field name="name">Marchands</field>
+      <field name="res_model">money_management.marchand</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record-->
+    <record model="ir.ui.view" id="view_users_form">
+      <field name="name">res.users.form.inherit</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="/form/sheet/div[@class='oe_title']/group/field[@name='partner_id']" position="after">
+              <field name="nom_marchand"/>
+              <field name="telephone"/>
+              <field name="address"/>
+              <field name="description"/>
+              <field name="nb_point_of_sale"/>
+              <field name="cartegori_type_id"/>
+              <field name="code"/>
+              <field name="localisation"/>
+              <field name="nb_customer_day"/>
+              <field name="ninea"/>
+              <field name="rccm"/>
+              <field name="cni"/>
+              <field name="other_documment"/>
+              <field name="date_creation"/>
+              <field name="state"/>
+              <field name="facturation_mensuel"/>
+              <field name="is_facturation"/>
+              <field name="facturations"/>
+              <field name="id"/>
+          </xpath>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="money_management.marchand_action_window">
+      <field name="name">Marchands</field>
+      <field name="res_model">res.users</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End Marchand record-->
+
+   <!--Approvisionnement record-->
+      <record model="ir.ui.view" id="money_management.appro_list">
+      <field name="name">Approvisionnement</field>
+      <field name="model">money_management.approvisionnement</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="libelle"/>
+          <field name="amount"/>
+          <field name="appro_marchand_id"/>
+          <field name="appro_boutique_id"/>
+          <field name="date_approvisionnement"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.appro_action_window">
+      <field name="name">Approvisionnements</field>
+      <field name="res_model">money_management.approvisionnement</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End Approvisionnement record-->
+
+   <!--Oeuvre Caritative record-->
+      <record model="ir.ui.view" id="money_management.oeuvre_list">
+      <field name="name">Oeuvres Caricatives</field>
+      <field name="model">money_management.oeuvrecaritative</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="logo" widget="image" string="Logo" class="oeuvre_logo"/>
+          <field name="name"/>
+          <field name="telephone"/>
+          <field name="adresse"/>
+          <field name="description"/>
+          <field name="date_enregistrement"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.oeuvre_action_window">
+      <field name="name">Oeuvres Caricatives</field>
+      <field name="res_model">money_management.oeuvrecaritative</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+   <!--End Approvisionnement record-->
+
+   <!--CustomerRQ record-->
+      <record model="ir.ui.view" id="money_management.customer_qr_list">
+      <field name="name">Client QR-code</field>
+      <field name="model">money_management.customerqr</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="amount"/>
+          <field name="date_generation"/>
+          <field name="date_scann"/>
+          <field name="state"/>
+          <field name="qr_type"/>
+        </tree>
+      </field>
+    </record>
+     <!--End CustomerRQ record-->
+
+    <!--DistributeurQRcode record-->
+      <record model="ir.ui.view" id="money_management.distributeur_qr_list">
+      <field name="name">Distributeur QR-code</field>
+      <field name="model">money_management.distributeu_qr</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="amount"/>
+          <field name="date_generation"/>
+          <field name="date_scann"/>
+          <field name="state"/>
+          <field name="qr_type"/>
+        </tree>
+      </field>
+    </record>
+     <!--End DistributeurQRcode record-->
+
+    <!--PRechargemen record-->
+      <record model="ir.ui.view" id="money_management.prechargement">
+      <field name="name">Orabank Préchargement UV </field>
+      <field name="model">money_management.prechargement_uv</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="date_prechargement"/>
+          <field name="prechargement_name"/>
+          <field name="uv_amount"/>
+          <field name="uv_crone_before"/>
+          <field name="uv_crone_after"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.prechargement_window">
+      <field name="name">Orabank Préchargement UV</field>
+      <field name="res_model">money_management.prechargement_uv</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+     <!--End PRechargemen record-->
+
+    <!--MarchandAchat UV record-->
+      <record model="ir.ui.view" id="money_management.achat_uv">
+      <field name="name">Marchand Achat UV</field>
+      <field name="model">money_management.achat_uv</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="date_achat_uv"/>
+          <field name="uv_amount"/>
+          <field name="marchand_achat_uv"/>
+          <field name="uv_marchand_before"/>
+          <field name="uv_marchand_after"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.achat_uv_window">
+      <field name="name">Marchand Achat UV</field>
+      <field name="res_model">money_management.achat_uv</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+     <!--End MarchandAchat UV record-->
+
+    <!--DistributeurAchat UV record-->
+      <record model="ir.ui.view" id="money_management.distributeur_achat_uv">
+      <field name="name">Distributeur Achat UV</field>
+      <field name="model">money_management.distributeur_achat_uv</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="date_achat_uv"/>
+          <field name="uv_amount"/>
+          <field name="distributeur_achat_uv"/>
+          <field name="uv_distributeur_before"/>
+          <field name="uv_distributeur_after"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.distributeur_achat_uv_window">
+      <field name="name">Distributeur Achat UV</field>
+      <field name="res_model">money_management.distributeur_achat_uv</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+     <!--End DistributeurAchat UV record-->
+
+     <!--Categorie Facturation record-->
+      <record model="ir.ui.view" id="money_management.categorie_facture">
+      <field name="name">Categorie Facturation CRONE</field>
+      <field name="model">money_management.categorie_facturation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nom"/>
+          <field name="mensualite"/>
+          <field name="type"/>
+          <field name="numero"/>
+          <field name="solde_plafond"/>
+          <field name="mvt_plafond"/>
+          <field name="date"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.categorie_facture_window">
+      <field name="name">Categorie Facturation CRONE</field>
+      <field name="res_model">money_management.categorie_facturation</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+     <!--End Categorie Facturation record-->
+     
+     <!--Movement UV record-->
+      <record model="ir.ui.view" id="money_management.mouvement_uv">
+      <field name="name">Mouvement du Compteur des UV CRONE</field>
+      <field name="model">money_management.crone_uv_movement</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="mouvement_amount"/>
+          <field name="mouvement_type"/>
+          <field name="uv_crone_before"/>
+          <field name="uv_crone_after"/>
+          <field name="date_mouvement"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.mouvement_uv_window">
+      <field name="name">Mouvement du Compteur des UV CRONE</field>
+      <field name="res_model">money_management.crone_uv_movement</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+     <!--End Movement UV record-->
+
+    <!--Start Uv for Restricted sector-->
+     <record model="ir.ui.view" id="money_management.credit_restricted_list">
+      <field name="name">UV avec restrictin</field>
+      <field name="model">money_management.credit_restricted</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="tag"/>
+          <field name="amount"/>
+          <field name="cartegorie_id"/>
+          <field name="consumption_date"/>
+          <field name="used_amount"/>
+          <field name="state"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+    </record>
+     <record model="ir.actions.act_window" id="money_management.credit_restricted_window">
+       <field name="name">Credit restriction</field>
+       <field name="res_model">money_management.credit_restricted</field>
+       <field name="view_mode">tree,form,graph,pivot</field>
+     </record>
+    <!--End Uv for Restricted sector-->
+
+    <!--Trading Type record-->
+      <record model="ir.ui.view" id="money_management.trading_type_">
+      <field name="name">Catégories commerces</field>
+      <field name="model">money_management.trading_type</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.actions.act_window" id="money_management.trading_type_window">
+      <field name="name">money_management.trading_window</field>
+      <field name="res_model">money_management.trading_type</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+     <!--End Movement UV record-->
+
+    <!--Facturation Marchand -->
+      <record model="ir.ui.view" id="money_management.trading_type_">
+      <field name="name">Facturations Marchands</field>
+      <field name="model">money_management.facturation_marchand</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="facturation_reff"/>
+          <field name="min_amount"/>
+          <field name="max_amount"/>
+          <field name="facturation_type"/>
+          <field name="facturation_value"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+      </record>
+    <!--End Facturation Marchand-->
+
+    <!--Facturation Boutique -->
+      <record model="ir.ui.view" id="money_management.trading_type_">
+      <field name="name">Facturations Boutiques</field>
+      <field name="model">money_management.facturation_boutique</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="facturation_reff"/>
+          <field name="min_amount"/>
+          <field name="max_amount"/>
+          <field name="facturation_type"/>
+          <field name="facturation_value"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+      </record>
+    <!--End Facturation Boutique-->
+    
+    <!--Facturation Caisse -->
+      <record model="ir.ui.view" id="money_management.trading_type_">
+      <field name="name">Facturations Caisse</field>
+      <field name="model">money_management.facturation_caisse</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="facturation_reff"/>
+          <field name="min_amount"/>
+          <field name="max_amount"/>
+          <field name="facturation_type"/>
+          <field name="facturation_value"/>
+          <field name="date_creation"/>
+        </tree>
+      </field>
+      </record>
+    <!--End Facturation Caisse-->
+
+
+    <!-- Top menu item -->
+
+    
+    <menuitem name="CRONE" id="money_management.menu_root"/>
+   
+    <!-- menu categories -->
+    <menuitem name="BOUTIQUE" id="money_management.menu_boutique" parent="money_management.menu_root" />
+    <menuitem name="BOUTIQUES" id="money_management.menu_boutiques" parent="money_management.menu_boutique" action="money_management.boutique_action_window"/>
+    <menuitem name="CAISSES" id="money_management.menu_caisse" parent="money_management.menu_boutique" action="money_management.caisse_action_window"/>
+    <menuitem name="AVOIRS" id="money_management.menu_avoir" parent="money_management.menu_boutique" action="money_management.avoir_action_window"/>
+    <menuitem name="AGENTS" id="money_management.menu_agent" parent="money_management.menu_boutique" action="money_management.agent_action_window"/>
+    <menuitem name="PAIEMENTS" id="money_management.menu_payment" parent="money_management.menu_boutique" action="money_management.payment_action_window"/>
+
+    <menuitem name="CLIENTS" id="money_management.menu_client" parent="money_management.menu_root" action="money_management.client_action_window"/>
+    
+    <menuitem name="Distributeur" id="money_management.menu_distributeur" parent="money_management.menu_root" />
+    <menuitem name="Distributeurs" id="money_management.menu_distributeurs" parent="money_management.menu_distributeur" action="money_management.distributeur_action_window"/>
+    <menuitem name="Distributeur Achat UV" id="money_management.menu_distributeur_achat_uv" parent="money_management.menu_distributeur" action="money_management.distributeur_achat_uv_window"/>
+
+    <menuitem name="WALLET" id="money_management.menu_wallet" parent="money_management.menu_root" action="money_management.wallet_action_window"/>
+
+    <menuitem name="TRANSACTION" id="money_management.menu_transaction" parent="money_management.menu_root" />
+    <menuitem name="TRANSACTIONS" id="money_management.menu_transactions" parent="money_management.menu_transaction" action="money_management.transactions_action_window"/>
+    <menuitem name="TRANSACTION Wallet" id="money_management.menu_transaction_wallet" parent="money_management.menu_transaction" action="money_management.transaction_wallet_action_window"/>
+    <!--<menuitem name="TRANSACTIONS WALLET" id="money_management.menu_transaction_wallet" parent="money_management.menu_transaction" action="money_management.transaction_wallet_action_window"/>-->
+    <menuitem name="TYPE TRANSACTION" id="money_management.menu_types_transaction" parent="money_management.menu_transaction" action="money_management.transactions_types_action_window"/>
+    
+    <menuitem name="ACCOUNTS" id="money_management.menu_accounts" parent="money_management.menu_root" action="money_management.accounts_action_window"/>
+    
+    <menuitem name="MARCHAND" id="money_management.menu_marchand" parent="money_management.menu_root" />
+    <menuitem name="MARCHANDS" id="money_management.menu_marchands" parent="money_management.menu_marchand" action="money_management.marchand_action_window"/>
+    <menuitem name="Marchand Achat UV" id="money_management.menu_achat_uv" parent="money_management.menu_marchand" action="money_management.achat_uv_window"/>
+    <menuitem name="Approvisionnement" id="money_management.menu_appro" parent="money_management.menu_marchand" action="money_management.appro_action_window"/>
+    
+    <menuitem name="Oeuvres Caritatives" id="money_management.menu_oeuvre" parent="money_management.menu_root" action="money_management.oeuvre_action_window"/>
+    
+    <menuitem name="Orabank Préchargement" id="money_management.menu_precharge" parent="money_management.menu_root" action="money_management.prechargement_window"/>
+    <menuitem name="Mouvement UV" id="money_management.menu_mouvement_uv" parent="money_management.menu_root" action="money_management.mouvement_uv_window"/>
+    
+    <menuitem name="Categorie Facture" id="money_management.menu_categorie_facture" parent="money_management.menu_root" action="money_management.categorie_facture_window"/>
+    <menuitem name="Catégories Commerces" id="money_management.menu_trading_type" parent="money_management.menu_root" action="money_management.trading_type_window"/>
+    <!-- menuitem name="Restriction" id="money_management.menu_credit_restriction" parent="money_management.menu_root" action="money_management.trading_type_window"/-->
+
+
+
+   
+    <!-- actions -->
+   
+    <!--menuitem name="Liste des boutiques" id="money_management.menu_1_list" parent="money_management.menu_boutique"
+              action="money_management.boutique_action_window"/>
+    <menuitem name="Server to list boutique" id="money_management_menu_1_server" parent="money_management.menu_boutique"
+              action="money_management.boutique_action_server"/>
+    
+    <menuitem name="Liste des clients" id="money_management.menu_2_list" parent="money_management.menu_client"
+              />
+
+    <menuitem name="Liste des avoirs" id="money_management.menu_avoir_1" parent="money_management.menu_avoir"
+              />
+
+    <menuitem name="Agent List" id="money_management.menu_agent_1" parent="money_management.menu_agent"
+              /-->
+   
+  </data>
+</odoo>
